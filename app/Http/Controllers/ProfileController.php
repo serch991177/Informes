@@ -18,13 +18,13 @@ class ProfileController extends Controller
         $attributes = request()->validate([
             'email' => 'required|email|unique:users,email,'.$user->id,
             'name' => 'required',
-            'phone' => 'required|max:10',
-            'about' => 'required:max:150',
-            'location' => 'required'
+           // 'phone' => 'required|max:10',
+            //'about' => 'required:max:150',
+            //'location' => 'required'
         ]);
 
         auth()->user()->update($attributes);
-        return back()->withStatus('Profile successfully updated.');
+        return back()->withStatus('Perfil Actualizado Correctamente');
     
 }
 }
