@@ -45,10 +45,22 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('aut
 Route::get('/tables', [OficinaController::class, 'index'])->middleware('auth')->name('tables');
 Route::get('/oficinas', [OficinaController::class, 'create'])->middleware('auth')->name('oficinas');
 Route::post('/oficinas', [OficinaController::class, 'store']);
+Route::post('/editar-oficina',[OficinaController::class, 'show'])->middleware('auth')->name('editar_oficina');
+Route::post('/actualizar-oficina', [OficinaController::class, 'update'])->middleware('auth')->name('actualizar_oficina');
+//rutas de los funcionarios
+Route::get('/user-management', [ProfileController::class, 'index'])->middleware('auth')->name('user-management');
+Route::get('funcionarios', [RegisterController::class, 'create'])->middleware('auth')->name('register');
+Route::post('funcionarios', [RegisterController::class, 'store'])->middleware('auth');
+Route::post('/editar-funcionario',[RegisterController::class, 'show'])->middleware('auth')->name('editar_funcionario');
+Route::post('/editar-rol',[RegisterController::class, 'roles'])->middleware('auth')->name('editar_rol');
+Route::post('/actualizar-funcionario', [RegisterController::class, 'update'])->middleware('auth')->name('actualizar_funcionario');
+Route::post('/actualizar-rol', [RegisterController::class, 'updaterol'])->middleware('auth')->name('actualizar_rol');
+
+
+
 //fin rutas de las oficinas
 
-Route::get('sign-up', [RegisterController::class, 'create'])->middleware('guest')->name('register');
-Route::post('sign-up', [RegisterController::class, 'store'])->middleware('guest');
+
 Route::get('sign-in', [SessionsController::class, 'create'])->middleware('guest')->name('login');
 Route::post('sign-in', [SessionsController::class, 'store'])->middleware('guest');
 Route::post('verify', [SessionsController::class, 'show'])->middleware('guest');
@@ -82,9 +94,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('static-sign-up', function () {
 		return view('pages.static-sign-up');
 	})->name('static-sign-up');
-	Route::get('user-management', function () {
-		return view('pages.laravel-examples.user-management');
-	})->name('user-management');
 	Route::get('user-profile', function () {
 		return view('pages.laravel-examples.user-profile');
 	})->name('user-profile');

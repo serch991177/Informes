@@ -25,7 +25,19 @@ class User extends Authenticatable
         'location',
         'phone',
         'about',
-        'password_confirmation'
+        'password_confirmation',
+        'apellido_paterno',
+        'apellido_materno',
+        'carnet',
+        'celular',
+        'telefono',
+        'cargo',
+        'unidad',
+        'estado',
+        'generador',
+        'revisor',
+        'finalizador',
+        'id_oficina'
     ];
 
     /**

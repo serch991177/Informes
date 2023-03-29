@@ -1,4 +1,6 @@
 <x-layout bodyClass="g-sidenav-show  bg-gray-200">
+@include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
+
         <x-navbars.sidebar activePage="Oficinas"></x-navbars.sidebar>
         <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
             <!-- Navbar -->
@@ -41,7 +43,13 @@
                                                     <td>{{$oficina->numero}}</td>
                                                     <td>{{$oficina->nombre_oficina}}</td>
                                                     <td>{{$oficina->nombre_oficina_superior}}</td>
-                                                    <td><button class="btn btn-info" title="Ver / Editar"><i class="fa fa-file-text-o"></i></button></td>
+                                                    <td>
+                                                        <form action="{{route('editar_oficina')}}" method="post" >
+                                                            @csrf
+                                                            <input type="hidden" name="id" value="{{$oficina->id}}">
+                                                            <button class="btn btn-info" title="Ver / Editar"><i class="fa fa-file-text-o"></i></button>
+                                                        </form>
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                             </tbody>

@@ -3,12 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\View\View;    
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class ProfileController extends Controller
 {
+    public function index()
+    {
+        $user = User::all();
+        //dd($user);
+        return view('pages.laravel-examples.user-management')->with('user',$user);
+    }
     public function create()
     {
-        return view('pages.profile');
+                return view('pages.profile');
     }
 
     public function update()
@@ -24,6 +34,7 @@ class ProfileController extends Controller
         ]);
 
         auth()->user()->update($attributes);
+        //dd($user);
         return back()->withStatus('Perfil Actualizado Correctamente');
     
 }

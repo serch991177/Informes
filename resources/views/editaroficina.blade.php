@@ -13,14 +13,15 @@
                         <div class="card my-4">
                             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                                 <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                                    <h6 class="text-white text-capitalize ps-3">Formulario de creacion de oficina</h6>
+                                    <h6 class="text-white text-capitalize ps-3">Actualizacion de datos</h6>
                                     <!--<p class="text-white text-capitalize  ps-3">Oficinas</p>-->                            
                                 </div>
                             </div>
                             <div class="card-body px-0 pb-2">
                                 <!--card de creacion de oficinas-->
-                                <form action="{{ route('oficinas') }}" method="post">
+                                <form action="{{ route('actualizar_oficina') }}" method="post">
                                      @csrf
+                                     
                                     <div class="card">
                                             <div class="card-header card-header-info">
                                                     <h1 class="card-title text-center">DATOS DE LA OFICINA</h1>
@@ -32,7 +33,7 @@
                                                     <div class="col-12 col-sm-6 col-md-4 mt-3"> 
                                                         <div class="input-group input-group-static is-valid mb-4">
                                                             <label class="" for="numero">Numero:<span class="text-danger">(*)</span></label>
-                                                            <input type="text" name="numero" id="numero" class="form-control" onkeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false" value="{{old('numero')}}">
+                                                            <input type="text" name="numero" id="numero" class="form-control" onkeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false" value="{{$solicitud->numero}}">
                                                         </div>
                                                         @error('numero')
                                                             <p class='text-danger inputerror'>{{ $message }} </p>
@@ -41,7 +42,7 @@
                                                     <div class="col-12 col-sm-6 col-md-4 mt-3">
                                                         <div class="input-group input-group-static is-valid mb-4">
                                                             <label class="" for="nombre">Nombre de la oficina:<span class="text-danger">(*)</span></label>
-                                                            <input type="text" class="form-control" name="nombre_oficina" id="nombre_oficina" value="{{old('nombre_oficina')}}">
+                                                            <input type="text" class="form-control" name="nombre_oficina" id="nombre_oficina" value="{{$solicitud->nombre_oficina}}">
                                                         </div>      
                                                         @error('nombre_oficina')
                                                             <p class='text-danger inputerror'>{{ $message }} </p>
@@ -50,7 +51,7 @@
                                                     <div class="col-12 col-sm-6 col-md-4 mt-3">
                                                         <div class="input-group input-group-static is-valid mb-4">
                                                             <label class="" for="oficina_superior">Nombre de la oficina superior:<span class="text-danger">(*)</span></label>
-                                                            <input type="text" name="nombre_oficina_superior" id="nombre_oficina_superior" class="form-control" value="{{old('nombre_oficina_superior')}}">
+                                                            <input type="text" name="nombre_oficina_superior" id="nombre_oficina_superior" class="form-control" value="{{$solicitud->nombre_oficina_superior}}">
                                                         </div>
                                                         @error('nombre_oficina_superior')
                                                             <p class='text-danger inputerror'>{{ $message }} </p>
@@ -60,7 +61,7 @@
                                                         <label class="" for="numero">Estado:<span class="text-danger">(*)</span></label>
                                                         <div class="input-group input-group-static is-valid mb-4">    
                                                             <select class="form-control" name="estado" id="estado">
-                                                                <option value="{{old('estado')}}">* Seleccione una opción *</option>
+                                                                <option value="{{$solicitud->estado}}">{{ strtoupper($solicitud->estado)}}</option>
                                                                 <option value="activo">ACTIVO</option>
                                                                 <option value="inactivo">INACTIVO</option>
                                                             </select>                                                    
@@ -68,14 +69,24 @@
                                                         @error('estado')
                                                             <p class='text-danger inputerror'>{{ $message }} </p>
                                                         @enderror 
-                                                </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6 col-md-4 mt-3">
+                                                        <div class="input-group input-group-static is-valid mb-4">
+                                                            <!--<label class="" for="oficina_superior">ID<span class="text-danger">(*)</span></label>-->
+                                                            <input type="hidden" name="id" id="id" class="form-control" value="{{$solicitud->id}}">
+                                                        </div> 
+                                                    </div>
                                                 <!-- Fin Formulario de oficina-->
                                                 <!--boton para guardar oficina-->
                                                 <div class="row" >                                                                         
                                                     <div class="col-12 col-sm-6 col-md-4 mt-3">
-                                                        <input type="submit" value="Crear Oficina" class="btn btn-success">
+                                                        <input type="submit" value="Actualizar Oficina" class="btn btn-success">
+                                                    </div>
+                                                    <div class="col-12 col-sm-6 col-md-4 mt-3">
+                                                        <a type="button" class="btn btn-danger" href="{{ route('tables') }}">Volver Atras</a>
                                                     </div>
                                                 </div>
+                                                
                                                 <!--Fin boton guardar oficina-->
                                                 </div>
                                                 </div>                    
