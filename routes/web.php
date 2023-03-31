@@ -37,6 +37,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\OficinaController;
+use App\Http\Controllers\InformeController;
 
 
 Route::get('/', function () {return redirect('sign-in');})->middleware('guest');
@@ -55,6 +56,14 @@ Route::post('/editar-funcionario',[RegisterController::class, 'show'])->middlewa
 Route::post('/editar-rol',[RegisterController::class, 'roles'])->middleware('auth')->name('editar_rol');
 Route::post('/actualizar-funcionario', [RegisterController::class, 'update'])->middleware('auth')->name('actualizar_funcionario');
 Route::post('/actualizar-rol', [RegisterController::class, 'updaterol'])->middleware('auth')->name('actualizar_rol');
+//rutas informe
+Route::get('/billing', [InformeController::class, 'index'])->middleware('auth')->name('billing');
+Route::get('/informe', [InformeController::class, 'create'])->middleware('auth')->name('informe');
+Route::post('/informe', [InformeController::class, 'store'])->middleware('auth')->name('guardar_informe');
+Route::post('/editar-informe',[InformeController::class, 'show'])->middleware('auth')->name('editar_informe');
+Route::post('/actualizar-informe', [InformeController::class, 'update'])->middleware('auth')->name('actualizar_informe');
+Route::post('/descargar-formulario', [InformeController::class, 'pdf'])->middleware('auth')->name('descargarpdf');
+
 
 
 
@@ -76,9 +85,7 @@ Route::post('sign-out', [SessionsController::class, 'destroy'])->middleware('aut
 Route::get('profile', [ProfileController::class, 'create'])->middleware('auth')->name('profile');
 Route::post('user-profile', [ProfileController::class, 'update'])->middleware('auth');
 Route::group(['middleware' => 'auth'], function () {
-	Route::get('billing', function () {
-		return view('pages.billing');
-	})->name('billing');
+	
 	Route::get('rtl', function () {
 		return view('pages.rtl');
 	})->name('rtl');

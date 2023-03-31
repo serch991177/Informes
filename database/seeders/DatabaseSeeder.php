@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\TipoInforme;
+use Illuminate\Support\Facades\DB;
 
 
 class DatabaseSeeder extends Seeder
@@ -31,6 +33,55 @@ class DatabaseSeeder extends Seeder
             'generador'=>'true',
             'revisor'=>'true',
             'finalizador'=>'true',
+        ]);
+
+        DB::table('informe')->insert([
+            'numero'=>'1',
+            'id_usuario'=>'0',
+            'usuario'=>'0',
+            'nombre_dirigido'=>'0',
+            'cargo'=>'0',
+            'unidad'=>'0',
+            'referencia'=>'0',
+            'tipo_informe'=>'0',
+            'fecha'=>'0',
+            'dato_informe'=>'0',
+        ]);     
+        
+        DB::table('tipo_informes')->insert([
+            'nombre' => 'Instructivos',
+        ]);
+
+        DB::table('tipo_informes')->insert([
+            'nombre' => 'Memorandums',
+        ]);
+
+        DB::table('tipo_informes')->insert([
+            'nombre' => 'Autos Administrativos',
+        ]);
+
+        DB::table('tipo_informes')->insert([
+            'nombre' => 'Resoluciones Administrativas',
+        ]);
+
+        DB::table('tipo_informes')->insert([
+            'nombre' => 'Resoluciones Administrativas Sancionatorias',
+        ]);
+
+        DB::table('tipo_informes')->insert([
+            'nombre' => 'Resoluciones Administrativas Municipales',
+        ]);
+
+        DB::table('tipo_informes')->insert([
+            'nombre' => 'Resoluciones De Recurso De Revocatoria',
+        ]);
+
+        DB::table('tipo_informes')->insert([
+            'nombre' => 'Cartas Externas',
+        ]);
+
+        DB::table('tipo_informes')->insert([
+            'nombre' => 'Comunicacion Internas',
         ]);
     }
 }

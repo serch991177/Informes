@@ -67,7 +67,7 @@
                                                     <div class="col-12 col-sm-6 col-md-4 mt-3"> 
                                                         <div class="input-group input-group-static is-valid mb-4">
                                                             <label class="" for="celular">Celular<span class="text-danger">(*)</span></label>
-                                                            <input type="text" name="celular" id="celular" class="form-control"  value="{{old('celular')}}">
+                                                            <input type="text" name="celular" id="celular" class="form-control" onkeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false"  value="{{old('celular')}}">
                                                         </div>
                                                         @error('celular')
                                                             <p class='text-danger inputerror'>{{ $message }} </p>
@@ -76,7 +76,7 @@
                                                     <div class="col-12 col-sm-6 col-md-4 mt-3"> 
                                                         <div class="input-group input-group-static is-valid mb-4">
                                                             <label class="" for="telefono">Telefono:<span class="text-danger"></span></label>
-                                                            <input type="text" name="telefono" id="telefono" class="form-control"  value="{{old('telefono')}}">
+                                                            <input type="text" name="telefono" id="telefono" class="form-control" onkeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false"  value="{{old('telefono')}}">
                                                         </div>
                                                     </div>
                                                     <div class="col-12 col-sm-6 col-md-4 mt-3"> 
