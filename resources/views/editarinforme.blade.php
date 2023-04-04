@@ -78,7 +78,7 @@
                                                                         <option value="{{$tipoinformes->nombre}}">{{$tipoinformes->nombre}}</option>
                                                                         @endforeach
                                                                     </select>
-                                                                </div>                                                       
+                                                                </div>                                                        
                                                         </div>
                                                     </div>
                                                     <div class="col-12 col-sm-6 col-md-4 mt-3">

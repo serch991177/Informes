@@ -49,7 +49,7 @@ class DatabaseSeeder extends Seeder
         ]);     
         
         DB::table('tipo_informes')->insert([
-            'nombre' => 'Instructivos',
+            'nombre' => 'Instructivos', 
         ]);
 
         DB::table('tipo_informes')->insert([

@@ -10,6 +10,8 @@ use App\Models\TipoInforme;
 use App\Models\Informe;
 use App\Models\User;
 use RealRashid\SweetAlert\Facades\Alert;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class InformeController extends Controller
 {
@@ -142,10 +144,39 @@ class InformeController extends Controller
         $solicitud = Informe::find($solicitudId);
 
         $informe=DB::table('informe')->where('informe.id','=',$solicitudId)
-            ->select('informe.numero','informe.id_usuario','informe.usuario','informe.nombre_dirigido','informe.cargo','informe.unidad','informe.referencia','informe.tipo_informe','informe.fecha','informe.dato_informe','informe.id_oficina','informe.oficina')
-            -> first();
-        dd($informe);
+            ->select('informe.id','informe.numero','informe.id_usuario','informe.usuario','informe.nombre_dirigido','informe.cargo','informe.unidad','informe.referencia','informe.tipo_informe','informe.fecha','informe.dato_informe','informe.id_oficina','informe.oficina')
+            -> first(); 
+        
+        $todo = Informe::all();
+        
+            //configuracion pdf
+            $vista = view('pdf', [
+                'informe'       =>  $informe,
+                'todo'           =>  $todo,
+               /* 'predio'         =>  $predio,
+                'propietarios'   =>  $propietarios,
+                'recepcion'      =>  $tramite,
+                'responsable'    =>  $responsable,
+                'solicitud'      =>  $solicitud,
+                'requisitos'     =>  $requisitos,
+                'pagos'          =>  $pagos,*/
+                ]);
+        $options = new Options();
+        $options->set('isRemoteEnabled', TRUE);
+        $dompdf = new Dompdf($options);
+        $dompdf->loadHtml($vista);
+        $dompdf->setPaper('letter', 'portrait');
+        $dompdf->render();
+        //$dompdf->stream('autorizacion.pdf');
+        //$dompdf->stream ('form.pdf',array('Attachment'=>0));
+        $dompdf->stream ('',array("Attachment" => false));
+        //$dompdf->set_option("isPhpEnabled",true);
+        //$dompdf->page_text(1,1, "{PAGE_NUM} of {PAGE_COUNT}", $font, 10, array(0,0,0));
+        $pdf = PDF::loadView('pdf');
+        return $pdf->stream('', array("Attachment" => false));
     }
+
+    
 
     /**
      * Remove the specified resource from storage.

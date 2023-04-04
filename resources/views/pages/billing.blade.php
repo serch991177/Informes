@@ -59,9 +59,9 @@
                                                             <input type="" name="id" value="{{$informes->id}}">
                                                             <button class="btn btn-success" title="Enviar a revision"><i class="fa fa-share-square-o" aria-hidden="true"></i></button>
                                                         </form>
-                                                        <form action="{{route('descargarpdf')}}" method="post" >
-                                                            @csrf
-                                                            <input type="" name="id" value="{{$informes->id}}">
+                                                        <form action="{{route('descargarpdf')}}" method="post" target="_blank">
+                                                            @csrf 
+                                                            <input type="hidden" name="id" value="{{$informes->id}}">
                                                             <button class="btn btn-primary" title="Imprimir Informe"><i class="fa fa-print" aria-hidden="true"></i></button>
                                                         </form>
                                                     </td>

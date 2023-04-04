@@ -127,7 +127,7 @@
                                                                     <textarea class="ckeditor" name="dato_informe" id="dato_informe" rows="10" cols="80">{{old('dato_informe')}}</textarea>
                                                                     <!--<input type="text" name="dato_informe" id="dato_informe" class="form-control"  value="{{old('dato_informe')}}">-->
                                                                 </div>                                                       
-                                                        </div>
+                                                        </div> 
                                                     </div>
                                                     @error('dato_informe')
                                                             <p class='text-danger inputerror'>{{ $message }} </p>

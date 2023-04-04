@@ -64,7 +64,7 @@ Route::post('/editar-informe',[InformeController::class, 'show'])->middleware('a
 Route::post('/actualizar-informe', [InformeController::class, 'update'])->middleware('auth')->name('actualizar_informe');
 Route::post('/descargar-formulario', [InformeController::class, 'pdf'])->middleware('auth')->name('descargarpdf');
 
-
+ 
 
 
 //fin rutas de las oficinas
