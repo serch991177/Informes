@@ -37,11 +37,11 @@ class DatabaseSeeder extends Seeder
 
         DB::table('informe')->insert([
             'numero'=>'1',
-            'id_usuario'=>'0',
+            'id_usuario_generador'=>'0',
             'usuario'=>'0',
             'nombre_dirigido'=>'0',
-            'cargo'=>'0',
-            'unidad'=>'0',
+            'cargo_dirigido'=>'0',
+            'unidad_dirigido'=>'0',
             'referencia'=>'0',
             'tipo_informe'=>'0',
             'fecha'=>'0',

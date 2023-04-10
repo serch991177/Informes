@@ -21,7 +21,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets') }}/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="https://sisgensg-dev.cochabamba.bo/img/favicon.ico">
+    <link rel="icon" type="image/png" href="/img/log_pagina.ico">
     <title>
         SISTEMA DE INFORMES SUB ALCALDIA
     </title>

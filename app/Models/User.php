@@ -37,7 +37,9 @@ class User extends Authenticatable
         'generador',
         'revisor',
         'finalizador',
-        'id_oficina'
+        'id_oficina',
+        'firma',
+        'nombre_completo',
     ];
 
     /**

@@ -21,8 +21,7 @@
                                     <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
                                         <div class="row mt-3">
                                             <h6 class='text-white text-center'>
-                                                
-                                                <img src="https://sisgensg-dev.cochabamba.bo/img/logo.png" alt="" width="85%">
+                                                <img src="/img/cocha_innovacion.png" alt="" width="85%">
                                         </div>
                                     </div>
                                 </div>

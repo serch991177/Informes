@@ -18,8 +18,7 @@ class RegisterController extends Controller
         return view('funcionarios')->with('oficinas',$oficinas);
     }
 
-    public function store(){
-
+    public function store(Request $request){
         $attributes = request()->validate([
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users,email',
@@ -36,9 +35,18 @@ class RegisterController extends Controller
             'generador'=>'',
             'revisor'=>'',
             'finalizador'=>'',
+            'firma'=>'required',
+            'nombre_completo'=>'',
         ]);
-       // dd($attributes);
+        if($imagen = $request->file('firma')) {
+            $rutaGuardarImg = 'imagenes/';
+            $imagenProducto = date('YmdHis'). "." . $imagen->getClientOriginalExtension();
+            $imagen->move($rutaGuardarImg, $imagenProducto);
+            $attributes['firma'] = "$imagenProducto";  
+        }
+        //dd($attributes);
         $user = User::create($attributes);
+        //dd($user);
         //auth()->login($user);
         Alert::success('Funcionario Creado Correctamente'); 
 
@@ -80,9 +88,20 @@ class RegisterController extends Controller
             'telefono'=>'',
             'generador'=>'',
             'revisor'=>'',
-            'finalizador'=>''
+            'finalizador'=>'',
+            'nombre_completo'=>'',
+
         ]);
         //dd($attributes);
+        if($imagen = $request->file('firma')){
+            $rutaGuardarImg = 'imagenes/';
+            $imagenProducto = date('YmdHis') . "." . $imagen->getClientOriginalExtension(); 
+            $imagen->move($rutaGuardarImg, $imagenProducto);
+            $attributes['firma'] = "$imagenProducto";
+         }else{
+            unset($attributes['imagen']);
+         }
+
         $users->update($attributes);
         Alert::success('Funcionario Actualizado Correctamente'); 
         return redirect('/user-management');

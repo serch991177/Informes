@@ -41,7 +41,7 @@
                                             </thead>
                                             <tbody>
                                             @foreach($informe as $informes)
-                                            @if($informes->estado=="Pendiente")                                                                           
+                                            @if($informes->estado=="Pendiente" || $informes->estado=="Observado")                                                                           
                                                 <tr>
                                                     <td>{{$informes->id}}</td>
                                                     <td>{{$informes->fecha}}</td>
@@ -54,9 +54,9 @@
                                                             <input type="hidden" name="id" value="{{$informes->id}}">
                                                             <button class="btn btn-info" title="Ver / Editar informe"><i class="fa fa-file-text-o"></i></button>
                                                         </form>
-                                                        <form action="#" method="post" target="_blank">
+                                                        <form action="{{route('enviar_para_revision')}} " method="post" >
                                                             @csrf
-                                                            <input type="" name="id" value="{{$informes->id}}">
+                                                            <input type="hidden" name="id" value="{{$informes->id}}">
                                                             <button class="btn btn-success" title="Enviar a revision"><i class="fa fa-share-square-o" aria-hidden="true"></i></button>
                                                         </form>
                                                         <form action="{{route('descargarpdf')}}" method="post" target="_blank">

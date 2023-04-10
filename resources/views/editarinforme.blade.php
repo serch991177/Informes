@@ -29,8 +29,13 @@
                                         <div class="card-body">
                                                 <div class="row">
                                                     <input type="hidden" value="{{$solicitud->id}}" name="id" id="id">
-                                                    <input type="hidden" value="{{$solicitud->id_usuario}}" name="id_usuario" id="id_usuario">
-                                                    <input type="hidden" value="{{$solicitud->usuario}}" name="usuario" id="usuario">
+                                                    @php($json = json_decode($solicitud->usuario , false))
+                                                    @foreach($json as $jsons)
+                                                    <input type="hidden" value="{{$jsons->nombre}}" name="usuario[]" id="usuario">
+                                                    <input type="hidden" value="{{$jsons->cargo}}" name="cargo[]" id="cargo">
+                                                    <input type="hidden" value="{{$jsons->unidad}}" name="unidad[]" id="unidad">
+                                                    <input type="hidden" value="{{$jsons->firma}}" name="firma[]" id="firma">
+                                                    @endforeach
                                                     <input type="hidden" value="Pendiente" name="estado" id="estado">
                                                     <div class="col-12">
                                                         <div class="form-group">
@@ -45,7 +50,7 @@
                                                         <div class="form-group">
                                                                 <div class="input-group input-group-static is-valid mb-4">
                                                                     <label for="cargo">Cargo :<span class="text-danger">(*)</span></label>
-                                                                    <input type="text" name="cargo" id="cargo" class="form-control"  value="{{$solicitud->cargo}}">
+                                                                    <input type="text" name="cargo_dirigido" id="cargo_dirigido" class="form-control"  value="{{$solicitud->cargo_dirigido}}">
                                                                 </div>                                                       
                                                         </div>
                                                     </div>
@@ -54,7 +59,7 @@
                                                         <div class="form-group">
                                                                 <div class="input-group input-group-static is-valid mb-4">
                                                                     <label for="unidad">Unidad :<span class="text-danger">(*)</span></label>
-                                                                    <input type="text" name="unidad" id="unidad" class="form-control"  value="{{$solicitud->unidad}}">
+                                                                    <input type="text" name="unidad_dirigido" id="unidad_dirigido" class="form-control"  value="{{$solicitud->unidad_dirigido}}">
                                                                 </div>                                                       
                                                         </div>
                                                     </div>
@@ -122,6 +127,10 @@
                                                 <div class="row" >                                                                         
                                                     <div class="col-12 col-sm-6 col-md-4 mt-3">
                                                         <input type="submit" value="Actualizar Informe" class="btn btn-success">
+                                                    </div>
+
+                                                    <div class="col-12 col-sm-6 col-md-4 mt-3">
+                                                        <a type="button" class="btn btn-danger" href="{{ route('billing') }}">Volver Atras</a>
                                                     </div>
                                                 </div>
                                                 <!--Fin boton guardar funcionario-->

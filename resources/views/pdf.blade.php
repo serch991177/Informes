@@ -1,90 +1,47 @@
 <html lang="en">
     <head>
-      <style>
-          @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
-          .logo {
-              width: 10%;
-              text-align: center;
-              border: 0px;   
-          }
-          @page { margin: 108px 80px; font-size:11px !important; line-height: 14px;  }
-          header {
-              position: fixed;
-              top: -108px;
-              left: 0px;
-              right: 0px;
-              height: 108px;
-              padding: .5em;
-              text-align: center;
-          }
-          
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-          footer {
-            /*overflow: hidden;*/
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>Informe</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+        .logo {
+            width: 10%;
+            text-align: center;
+            border: 0px;   
+        }
+        @page { margin: 108px 80px; font-size:11px !important; line-height: 14px;  }
+        header {
             position: fixed;
-            bottom: -0.3cm;
-            left: 0cm;
-            right: 0cm;
-            height: 1cm;            
-          }
-          .item{
-            height:40px;
-            padding:2em;
-            margin:1em;
-            background-color:#b30089;
-            color:white;
-          }
-
-          .tabla_firmas {
-            /*position: fixed;*/
-            
-            /**background-color: #2a0927;**/
-           
-            /**float:left;*/
-          }
-          
-          .qr_page{
-            
-          }
-          /*#pie_pagina .page:after {
-            content: counter(page);
-          }*/
-
-          .informacion {
-                position: fixed;
-                bottom: -2cm;
-                left: 0cm;
-                right: 0cm;
-                height: 2cm;*/
-                /**background-color: #2a0927;**/
-                color: black ;
-                line-height: 1px;
-                
-          }
-          
-          .firmas {
-              position: fixed;
-              bottom: 0cm;
-              left: 0cm;
-              right: 5cm;
-              height: 1cm;
-              /**background-color: #2a0927;**/
-              color: black ;
-              text-align: right;
-              line-height: 11px;
-             
-          }
-          #pie_pagina .page:after {
-            content: counter(page);
-          }
-      </style>
+            top: -108px;
+            left: 0px;
+            right: 0px;
+            height: 108px;
+            padding: .5em;
+            text-align: center;
+        }
+        footer {
+          /*overflow: hidden;*/
+          position: fixed;
+          bottom: -0.3cm;
+          left: 0cm;
+          right: 0cm;
+          height: 1cm;            
+        }
+        #pie_pagina .page:after {
+          content: counter(page);
+        }
+    </style>
     </head>
     <body>
 
     
           
-        <!--<div class="informacion">
-                        </div>-->
+    
         <header >
           <div  class="logo"  style="width: 20% !important; float:left;">
             @php($image_path1 = public_path() . '/img/escudo.png')
@@ -111,22 +68,23 @@
           <div style="left: 0cm; right: 0cm; height: 1cm; color: black ; text-align: left; line-height: 10px;" >
           <table style="width:84%; height:84%; " cellspacing="0" border="1">
               <tr>
-                  <th >Vo.Bo. Asesor 2 de secretaria general</th>
-                  <th>Jefe de departamento de movilidad urbana</th> 
-                  <th>Vo.Bo. Secretaria general</th>
-                  <th>Secretario de medio ambiente</th>
-                  <th >Vo.Bo. Asesor 2 de secretaria general</th>
-                  <th >Vo.Bo. Asesor 2 de secretaria general</th>
-                  <!--<th >Vo.Bo. Asesor 2 de secretaria general</th>-->
+                  
+                 
+                  @php($arr=(json_decode($informe->usuario, true)))
+                  @php($json_convertido = json_decode($arr)) 
+                  @foreach($json_convertido as $json_convertidos)
+                  <th >{{$json_convertidos->cargo}}</th>
+                  @endforeach
               </tr>
               <tr>
-                  <td align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f8/Firma_Len%C3%ADn_Moreno_Garc%C3%A9s.png" width="50" height="50" alt=""></br>Abg. Alfredo Alberto Marusic Quiroga</td>
-                  <td align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f8/Firma_Len%C3%ADn_Moreno_Garc%C3%A9s.png" width="50" height="50" alt=""></br>Lic. Henry Gonzalo Rico Garcia</td>
-                  <td align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f8/Firma_Len%C3%ADn_Moreno_Garc%C3%A9s.png" width="50" height="50" alt=""></br>Ing. Pepito Ronaldo Perez Pereira Fernandez</td>
-                  <td align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f8/Firma_Len%C3%ADn_Moreno_Garc%C3%A9s.png" width="50" height="50" alt=""></br>Ing. Ricardo Mendoza Garcia</td>
-                  <td align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f8/Firma_Len%C3%ADn_Moreno_Garc%C3%A9s.png" width="50" height="50" alt=""></br>Cap. Manfred Reyes Villa Bacigalupi</td>
-                  <td align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f8/Firma_Len%C3%ADn_Moreno_Garc%C3%A9s.png" width="50" height="50" alt=""></br>Cap. Manfred Reyes Villa Bacigalupi</td>
-                  <!--<td align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f8/Firma_Len%C3%ADn_Moreno_Garc%C3%A9s.png" width="50" height="50" alt=""></br>Cap. Manfred Reyes Villa Bacigalupi</td>-->
+              @php($arr=(json_decode($informe->usuario, true)))
+                  @php($json_convertido = json_decode($arr)) 
+                  @foreach($json_convertido as $json_convertidos)
+                  @php($image_pathfooter = public_path() . '/imagenes/'.$json_convertidos->firma)
+                  @php($imageDatafooter = base64_encode(file_get_contents($image_pathfooter)))
+                  @php($srcfooter = 'data:' . mime_content_type($image_pathfooter) . ';base64,' . $imageDatafooter)
+                  <td align="center"><img src="{{$srcfooter}}" width="50" height="50" alt="Firma"></br>{{$json_convertidos->nombre}}</td>
+                  @endforeach
               </tr>
           </table>
           </div>
@@ -134,7 +92,7 @@
             <img  src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Commons_QR_code.png" width="31%" /> 
             <br><br>
             <div id="pie_pagina" >
-              Pág. <snap class="page"></snap>      
+              <span style="font-size: 1.3pc;">Pág. </span><snap  style="font-size: 1.3pc;" class="page"></snap>      
             </div>
           </div>
         </footer>
@@ -143,53 +101,36 @@
         
 
         <!-- Wrap the content of your PDF inside a main tag -->
-        
-        <main >
-            <h3>What is Lorem Ipsum?</h3>
-            <p style="page-break-after: never;">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-            </p>
-            <h3>Where does it come from?</h3>
-            <p style="page-break-after: never;">            
-                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-            </p>
 
-            <h3>What is Lorem Ipsum?</h3>
-            <p style="page-break-after: never;">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-            </p>
-            <h3>Where does it come from?</h3>
-            <p style="page-break-after: never;">            
-                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-            </p>
+        <div style="position: fixed; bottom:   0cm; left:     0.2cm; width:    20cm; height:   20cm; z-index:  -1000;">
+          @php($image_path3 = public_path() . '/img/borrador.png')
+          @php($imageData3 = base64_encode(file_get_contents($image_path3)))
+          @php($src3 = 'data:' . mime_content_type($image_path3) . ';base64,' . $imageData3)
+          <img src="{{$src3}}" height="100%" width="100%">
+        </div>
 
-            <h3>What is Lorem Ipsum?</h3>
-            <p style="page-break-after: never;">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-            </p>
-            <h3>Where does it come from?</h3>
-            <p style="page-break-after: never;">            
-                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-            </p>
 
-            <h3>What is Lorem Ipsum?</h3>
-            <p style="page-break-after: never;">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-            </p>
-            <h3>Where does it come from?</h3>
-            <p style="page-break-after: never;">            
-                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-            </p>
+        <main>
+            <br>
+            <!--<span style="font-size:1pc;">Cochabamba, 1 de Marzo de 2023 </span>-->
+            <span style="font-size:1pc;">Cochabamba, {{$fechaformateada}}</span>
+            <h2 style="line-height: 0cm;">GAMC-CM-CE-505/2022</h2><br><br>
 
-            <h3>What is Lorem Ipsum?</h3>
-            <p style="page-break-after: never;">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-            </p>
-            <h3>Where does it come from?</h3>
-            <p style="page-break-after: never;">            
-                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-            </p>
-
+            <span style="font-size:1pc; line-height: 0.5cm;">A:</span><br>
+            <span style="font-size:1pc; line-height: 0.5cm;">{{$informe->nombre_dirigido}}</span><br>
+            <span style="font-size:1pc; line-height: 0.5cm;"><strong>{{$informe->cargo_dirigido}}</strong></span><br>
+            <span style="font-size:1pc; line-height: 0.5cm;"><strong>{{$informe->unidad_dirigido}}</strong></span><br>
+            <span style="font-size:1pc; line-height: 0.5cm;">De:</span><br>
+            @php($arr=(json_decode($informe->usuario, true)))
+            @php($json_convertido = json_decode($arr)) 
+            @foreach($json_convertido as $json_convertidos)
+            <span style="font-size:1pc; line-height: 0.5cm;">{{$json_convertidos->nombre}}</span><br>
+            <span style="font-size:1pc; line-height: 0.5cm;"><strong>{{$json_convertidos->cargo}}</strong></span><br>
+            <span style="font-size:1pc; line-height: 0.5cm;"><strong>{{$json_convertidos->unidad}}</strong></span><br>
+            @endforeach
+            <span style="font-size:1pc; line-height: 0.5cm;">Presente.</span><br>
+            <span style="font-size:1pc; line-height: 1cm;" >Ref.:&nbsp;&nbsp;&nbsp;<strong><u>{{$informe->referencia}}</u></strong></span>
+            <span style="font-size: 11pt">{!! $informe->dato_informe !!}</span>
         </main>
 
         

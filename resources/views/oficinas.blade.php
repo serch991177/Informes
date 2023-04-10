@@ -75,6 +75,10 @@
                                                     <div class="col-12 col-sm-6 col-md-4 mt-3">
                                                         <input type="submit" value="Crear Oficina" class="btn btn-success">
                                                     </div>
+
+                                                    <div class="col-12 col-sm-6 col-md-4 mt-3">
+                                                        <a type="button" class="btn btn-danger" href="{{ route('tables') }}">Volver Atras</a>
+                                                    </div>
                                                 </div>
                                                 <!--Fin boton guardar oficina-->
                                                 </div>

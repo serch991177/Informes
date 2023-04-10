@@ -10,11 +10,11 @@ class Informe extends Model
     use HasFactory;
     protected $table = 'informe';
     protected $fillable = [
-        'id_usuario',
+        'id_usuario_generador',
         'usuario',
         'nombre_dirigido',
-        'cargo',
-        'unidad',
+        'cargo_dirigido',
+        'unidad_dirigido',
         'referencia',
         'tipo_informe',
         'fecha',
@@ -24,5 +24,9 @@ class Informe extends Model
         'id_oficina',
         'oficina',
         'numero',
+    ];
+    protected $casts=[
+        'usuario'=> 'array',
+        
     ];
 }

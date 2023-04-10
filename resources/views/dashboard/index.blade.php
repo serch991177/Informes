@@ -8,10 +8,10 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="wrapper wrapper-full-page">
-                 <div class="login-page header-filter" filter-color="black" style="background-image: url('https://sisgensg-dev.cochabamba.bo/img/gaceta-municipal.jpg'); background-size: cover; background-position: top center;align-items: center;" data-color="purple">
+                 <div class="login-page header-filter" filter-color="black" style="background-image: url('/img/fondo.jpg'); background-size: cover; background-position: top center;align-items: center;" data-color="purple">
                     <div class="row justify-content-center">
                         <div class="col-6 col-sm-3 text-center">
-                            <img src="https://sisgensg-dev.cochabamba.bo/img/escudo-GAMC-vertical.png" alt="" width="100%">
+                            <img src="/img/escudo_web.png" alt="" width="100%">
                         </div>
                     </div>
                     <div class="row justify-content-center">

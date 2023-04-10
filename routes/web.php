@@ -38,6 +38,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\OficinaController;
 use App\Http\Controllers\InformeController;
+use App\Http\Controllers\RevisorController;
 
 
 Route::get('/', function () {return redirect('sign-in');})->middleware('guest');
@@ -63,6 +64,10 @@ Route::post('/informe', [InformeController::class, 'store'])->middleware('auth')
 Route::post('/editar-informe',[InformeController::class, 'show'])->middleware('auth')->name('editar_informe');
 Route::post('/actualizar-informe', [InformeController::class, 'update'])->middleware('auth')->name('actualizar_informe');
 Route::post('/descargar-formulario', [InformeController::class, 'pdf'])->middleware('auth')->name('descargarpdf');
+//rutas revisor
+Route::post('/enviar-para-revision',[InformeController::class, 'enviarrevision'])->middleware('auth')->name('enviar_para_revision');
+Route::post('revisor/recuperar_datos',[RevisorController::class, 'getdatas'])->middleware('auth')->name('recuperar_revisor');
+Route::post('/revisor', [RevisorController::class, 'store'])->middleware('auth')->name('guardar_actualizar_revisor');
 
  
 
