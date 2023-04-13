@@ -62,20 +62,20 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link text-dark {{ $activePage == 'virtual-reality' ? ' active bg-gradient-primary' : '' }}  "
-                    href="{{ route('virtual-reality') }}">
+                    href="{{ route('revisar_informe') }}">
                     <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">view_in_ar</i>
+                        <i class="material-icons opacity-10">archive</i>
                     </div>
-                    <span class="nav-link-text ms-1">Virtual Reality</span>
+                    <span class="nav-link-text ms-1">Revisar Informe</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-dark {{ $activePage == 'rtl' ? ' active bg-gradient-primary' : '' }}  "
-                    href="{{ route('rtl') }}">
+                    href="{{ route('informes_observados') }}">
                     <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">format_textdirection_r_to_l</i>
                     </div>
-                    <span class="nav-link-text ms-1">RTL</span>
+                    <span class="nav-link-text ms-1">Observaciones</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -96,7 +96,8 @@
                     <span class="nav-link-text ms-1">Profile</span>
                 </a>
             </li>
+            
         </ul>
+        
     </div>
-   
 </aside>

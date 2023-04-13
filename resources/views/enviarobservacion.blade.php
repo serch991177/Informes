@@ -19,7 +19,7 @@
                             </div>
                             <div class="card-body px-0 pb-2">
                                 <!--card de creacion de oficinas-->
-                                <form action="{{ route('actualizar_informe') }}" method="post">
+                                <form action="{{ route('guardar_actualizar_observacion') }}" method="post">
                                      @csrf
                                     <div class="card">
                                         <div class="card-header card-header-info">
@@ -28,7 +28,10 @@
                                         </div>
                                         <div class="card-body">
                                                 <div class="row">
-                                                    <input type="hidden" value="{{$solicitud->id}}" name="id" id="id">
+                                                    <input type="hidden" value="{{$solicitud->id}}" name="id_informe" id="id_informe">
+                                                    @foreach($consulta_observado as $consulta_observados)
+                                                    <input type="hidden" value="{{$consulta_observados->id}}" name="id_observacion" id="id_observacion">
+                                                    @endforeach
                                                     @php($json = json_decode($solicitud->usuario , false))
                                                     @foreach($json as $jsons)
                                                     <input type="hidden" value="{{$jsons->nombre}}" name="usuario[]" id="usuario">
@@ -36,8 +39,21 @@
                                                     <input type="hidden" value="{{$jsons->unidad}}" name="unidad[]" id="unidad">
                                                     <input type="hidden" value="{{$jsons->firma}}" name="firma[]" id="firma">
                                                     @endforeach
-                                                    <input type="hidden" value="{{$solicitud->estado}}" name="estado" id="estado">
-                                                    
+                                                    <input type="hidden" value="Derivado" name="estado" id="estado">
+                                                    @if($solicitud->estado =="Observado")
+                                                    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
+                                                    <style>
+                                                        /* Custom style to set icon size */
+                                                        .alert i[class^="bi-"]{
+                                                            font-size: 1.5rem;
+                                                            line-height: 1;
+                                                        }
+                                                    </style>
+                                                    <div class="alert alert-danger alert-dismissible fade show">
+                                                        <h4 class="alert-heading" style="color:white;"><i class="bi-exclamation-octagon-fill"></i> Oops! El presente documento tiene la siguiente observacion :</h4>
+                                                        <p style="color:white">{{$solicitud->observacion}}</p>
+                                                    </div>
+                                                    @endif 
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                                 <div class="input-group input-group-static is-valid mb-4">
@@ -127,9 +143,29 @@
                                                 <!--boton para guardar funcionario-->
                                                 <div class="row" >                                                                         
                                                     <div class="col-12 col-sm-6 col-md-4 mt-3">
-                                                        <input type="submit" value="Actualizar Informe" class="btn btn-success">
-                                                    </div>
-
+                                                        <input type="button" value="Actualizar y Derivar Informe" onclick="confirmToSaveBarsit();" class="btn btn-success">
+                                                </div>
+                                                <button type="submit" id="btnSend" style="display:none"></button>
+                                                    <script src="https://unpkg.com/sweetalert2@7.3.0/dist/sweetalert2.all.js"></script>
+                                                    <script>
+                                                        function confirmToSaveBarsit() {
+                                                                swal({
+                                                                    title: '¿Desea Derivar para revision ?',
+                                                                    text: "Tras derivar ya no podra " +
+                                                                    "realizar modificaciones",
+                                                                    type: 'question',
+                                                                    showCancelButton: true,
+                                                                    confirmButtonColor: '#3085d6',
+                                                                    cancelButtonColor: '#d33',
+                                                                    cancelButtonText: 'Cancelar',
+                                                                    confirmButtonText: 'Sí, enviar!'
+                                                                }).then((result) => {
+                                                                    if (result.value) {
+                                                                        $('#btnSend').click();
+                                                                    }
+                                                                })
+                                                            }
+                                                    </script>
                                                    
                                                     <!--<div class="col-12 col-sm-6 col-md-4 mt-3">
                                                         <a type="button" class="btn btn-danger" href="{{ route('billing') }}">Volver Atras</a>

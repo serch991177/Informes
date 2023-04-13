@@ -22,7 +22,16 @@ class InformeController extends Controller
     public function index()
     {
         $informe = Informe::all();
-        return view('pages.billing')->with('informe',$informe);
+        /**Funcion para recuperar solo los datos del usuario creado */
+        $iduser= Auth::id();    
+        $dato=DB::table('informe')
+        ->where('informe.id_usuario_generador',''.$iduser.'')
+        ->select()
+        ->get();
+       
+        /**Fin funcion para recuperar solo  los datos del usuario creado*/
+
+        return view('pages.billing')->with('dato',$dato);
     }
 
     /**
@@ -165,7 +174,7 @@ class InformeController extends Controller
         
         $category->update();
         Alert::success('Informe Actualizado Correctamente'); 
-        return redirect('/billing');
+        return redirect('/dashboard');
     }
 
     public function pdf(Request $request){

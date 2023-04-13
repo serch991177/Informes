@@ -68,6 +68,17 @@ Route::post('/descargar-formulario', [InformeController::class, 'pdf'])->middlew
 Route::post('/enviar-para-revision',[InformeController::class, 'enviarrevision'])->middleware('auth')->name('enviar_para_revision');
 Route::post('revisor/recuperar_datos',[RevisorController::class, 'getdatas'])->middleware('auth')->name('recuperar_revisor');
 Route::post('/revisor', [RevisorController::class, 'store'])->middleware('auth')->name('guardar_actualizar_revisor');
+Route::get('/revisar-informe', [RevisorController::class, 'index'])->middleware('auth')->name('revisar_informe');
+Route::post('/enviar-revision',[RevisorController::class, 'enviarrevisor'])->middleware('auth')->name('enviar_revision');
+Route::post('/actualizar-revisor', [RevisorController::class, 'update'])->middleware('auth')->name('actualizar_revisor');
+Route::get('/observaciones', [RevisorController::class, 'observacion'])->middleware('auth')->name('informes_observados');
+Route::post('/enviar-observacion-subsanada',[RevisorController::class, 'enviarobservacion'])->middleware('auth')->name('enviar_observacion_subsanada');
+Route::post('/actualizar-observacion', [RevisorController::class, 'actualizarobservacion'])->middleware('auth')->name('guardar_actualizar_observacion');
+
+
+
+
+ 
 
  
 

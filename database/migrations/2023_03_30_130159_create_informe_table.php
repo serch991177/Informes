@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('informe', function (Blueprint $table) {
             $table->id();
             $table->text('numero');
-            $table->text('id_usuario_generador');
+            $table->integer('id_usuario_generador');
             $table->json('usuario')->nullable();
             $table->text('nombre_dirigido');
             $table->text('cargo_dirigido');

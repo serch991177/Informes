@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('revisor', function (Blueprint $table) {
             $table->id();
-            $table->text('id_informe');
-            $table->text('id_usuario_revisor');
+            $table->integer('id_informe');
+            $table->integer('id_usuario_revisor');
             $table->text('nombre_revisor');
             $table->text('numero_generador');
             $table->text('fecha_generador');

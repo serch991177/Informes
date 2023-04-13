@@ -99,7 +99,7 @@ class RegisterController extends Controller
             $imagen->move($rutaGuardarImg, $imagenProducto);
             $attributes['firma'] = "$imagenProducto";
          }else{
-            unset($attributes['imagen']);
+            unset($attributes['firma']);
          }
 
         $users->update($attributes);

@@ -36,10 +36,11 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($user as $users)                               
+                                            @foreach($user as $users)    
+                                            @php($creador = $users->name.' '.$users->apellido_paterno.' '.$users->apellido_materno)                                                                                                  
                                                 <tr>
                                                     <td>{{$users->carnet}}</td>
-                                                    <td>{{$users->name}}</td>
+                                                    <td>{{$creador}}</td>
                                                     <td>{{$users->cargo}}</td>
                                                     <td>{{$users->id_oficina}}</td>
                                                     <td>

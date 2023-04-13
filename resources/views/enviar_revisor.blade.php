@@ -19,7 +19,7 @@
                             </div>
                             <div class="card-body px-0 pb-2">
                                 <!--card de creacion de oficinas-->
-                                <form action="{{ route('guardar_actualizar_revisor') }}" method="post">
+                                <form action="{{ route('actualizar_revisor') }}" method="post">
                                      @csrf
                                      @php($json = json_decode($solicitud->usuario , false))
                                      @foreach($json as $jsons)
@@ -28,7 +28,7 @@
                                      <input type="hidden" value="{{$jsons->unidad}}" name="unidad[]" id="unidad">
                                      <input type="hidden" value="{{$jsons->firma}}" name="firma[]" id="firma">
                                      @endforeach
-                                     <input type="hidden" value="Derivado" name="estado_revisor" id="estado_revisor">
+                                     <!--<input type="hidden" value="Derivado" name="estado_revisor" id="estado_revisor">-->
                                      <input type="hidden" value ="{{$solicitud->id}}" name="id_informe" >
                                      <input type="hidden" value="{{$solicitud->fecha}}" name="fecha_generador">
                                      <input type="hidden" value="{{$solicitud->nombre_dirigido}}" name="dirigido_nombre">
@@ -37,6 +37,7 @@
                                      <input type="hidden" value="{{$nombre_completo->nombre_completo}}" name="nombre_del_generador">
                                      <input type="hidden" value="{{$nombre_completo->cargo}}" name="cargo_del_generador">
                                      <input type="hidden" value="{{$nombre_completo->unidad}}" name="unidad_del_generador">
+
 
                                     <div class="card">
                                         <div class="card-header card-header-info">
@@ -63,6 +64,28 @@
                                                         </div>
                                                     </div>
                                                    
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                                <div class="input-group input-group-static is-valid mb-4">
+                                                                    <label for="accion">Accion :<span class="text-danger">(*)</span></label>
+                                                                    <select class="form-control" name="estado_revisor" id="estado_revisor" >
+                                                                        <option value="">**Seleccione una accion**</option>
+                                                                        <option value="Aprobado">Aprobado</option>
+                                                                        <option value="Observado">Observado</option>
+                                                                    </select>
+                                                                </div>                                                        
+                                                        </div>
+                                                    </div>
+
+                                
+                                                    <div class="col-12" id="div_observacion">
+                                                        <div class="form-group">
+                                                                <div class="input-group input-group-static is-valid mb-4">
+                                                                    <label for="observacion">Observacion :<span class="text-danger">(*)</span></label>
+                                                                    <textarea class="form-control" name="observacion" id="observacion" rows="4"></textarea>          
+                                                                </div>                                                        
+                                                        </div>
+                                                    </div>
                                                     <!--<div class="col-12">
                                                         <div class="form-group">
                                                             <div class="input-group input-group-static is-valid mb-4">
@@ -80,15 +103,17 @@
                                                     </div>-->
                                                     
 
-                                                    <div class="col-12">
+                                                    <div class="col-12" id="div_funcionario_aprobado">
                                                         <div class="form-group">
                                                                 <div class="input-group input-group-static is-valid mb-4">
                                                                     <label for="funcionario">Funcionario :<span class="text-danger">(*)</span></label>
                                                                     <select class="form-control" name="funcionario" id="funcionario" onChange="verificarResp()">
                                                                         <option value="">**Seleccione una Oficina**</option>
                                                                         @foreach($usuarios as $usuario)  
-                                                                        @if($usuario->estado=="activo" && $usuario->revisor =="true") 
+                                                                        @if($usuario->estado=="activo"  ) 
+                                                                        @if($usuario->revisor=="true" || $usuario->finalizador=="true")
                                                                         <option value="{{$usuario->nombre_completo}}">{{$usuario->nombre_completo}}</option>
+                                                                        @endif
                                                                         @endif
                                                                         @endforeach
                                                                     </select>
@@ -97,9 +122,22 @@
                                                       
                                                     </div>
 
+                                                    <div class="col-12" id="div_funcionario_observado">
+                                                        <div class="form-group">
+                                                                <div class="input-group input-group-static is-valid mb-4">
+                                                                    <label for="funcionario">Funcionario :<span class="text-danger">(*)</span></label>
+                                                                    <select class="form-control" name="funcionario1" id="funcionario1" onChange="verificarResp1()">
+                                                                        <option value="">**Seleccione una Oficina**</option>
+                                                                        @php($json = json_decode($solicitud->usuario , false))
+                                                                        @foreach($json as $jsons)
+                                                                        <option value="{{$jsons->nombre}}">{{$jsons->nombre}}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>                                                        
+                                                        </div>
+                                                    </div>
 
-
-                                                    <div class="col-12">
+                                                    <div class="col-12" id="div_oficina">
                                                         <div class="form-group">
                                                                 <div class="input-group input-group-static is-valid mb-4">
                                                                     <label for="oficina">Oficina :<span class="text-danger">(*)</span></label>
@@ -198,7 +236,61 @@
         verificarResp();
     })*/
 </script>
+<script>
+    /**Script Para mostrar y ocultar divs dependiendo del valor de la accion */
+    document.getElementById("div_observacion").style.display='none';
+    document.getElementById("div_funcionario_observado").style.display='none';
+    document.getElementById("div_funcionario_aprobado").style.display='none';
+    document.getElementById("div_oficina").style.display='none';
+    const valor_de_accion = document.querySelector("#estado_revisor");
+    valor_de_accion.addEventListener("change",()=>{
+        if(valor_de_accion.value === "Aprobado"){
+            document.getElementById("div_funcionario_aprobado").style.display='';
+            document.getElementById("div_oficina").style.display='';
+            document.getElementById("div_observacion").style.display='none';
+            document.getElementById("div_funcionario_observado").style.display='none';
+        }
+        if(valor_de_accion.value === "Observado"){
+            document.getElementById("div_observacion").style.display='';
+            document.getElementById("div_funcionario_aprobado").style.display='none';
+            document.getElementById("div_oficina").style.display='';
+            document.getElementById("div_funcionario_observado").style.display='';
+        }
+    });
+    /**Fin Script Para mostrar y ocultar divs dependiendo del valor de la accion */
+</script>
 
+<script>
+    function verificarResp1(){
+        $.ajax({
+                    type:"POST",
+                    headers: {
+                        'Content-Type':'application/json',
+                        'X-CSRF-TOKEN':'{{ csrf_token() }}',
+                            },
+                    url: "{{ route('recuperar_revisor') }}",
+                    async: false,
+                    data: JSON.stringify({
+                                'ciresp':  $('#funcionario1').val(),
+                                    }),
+                            success: function(data)
+                            {
+                                        if(data.status==true)
+                                        {
+                                        $('#id_usuario_revisor').val(data.data.id);
+                                        $('#nombre_funcionario_revisor').val(data.data.nombre_completo);
+                                        $('#nombre_funcionario').val(data.data.nombre_completo);
+                                        $('#cargo_funcionario').val(data.data.cargo);
+                                        $('#unidad_funcionario').val(data.data.unidad);
+                                        $('#firma_funcionario').val(data.data.firma);
+                                        }
+                            }
+            });
+    }
+    /*$(document).on('blur  ', '#browser', function(){
+        verificarResp();
+    })*/
+</script>
 <!--fin data table-->
         </main>
         <x-plugins></x-plugins>

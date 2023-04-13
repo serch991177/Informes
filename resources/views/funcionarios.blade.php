@@ -332,7 +332,7 @@
                                                             <input class="form-check-input" type="checkbox" role="switch" id="finalizador" name="finalizador">
                                                         </div> 
                                                     </div>
-                                                    <input type="hidden" name="nombre_completo" id="nombre_completo">                       
+                                                    <input type="hidden" name="nombre_completo" id="nombre_completo" value="{{old('nombre_completo')}}">                       
 
                                                 <!-- Fin Formulario de funcionario-->
                                                 <!--boton para guardar funcionario-->
@@ -353,31 +353,43 @@
                                     <script>
                                         $(document).on('blur  ', '#carnet', function(){
                                             var nombre=document.getElementById("name").value;
+                                            const nombre_sin=nombre.trim();
                                             var paterno=document.getElementById("apellido_paterno").value;
+                                            const paterno_sin=paterno.trim();
                                             var materno=document.getElementById("apellido_materno").value;
-                                            const nombrecompleto = nombre + " " +paterno +" " +materno;
-                                            document.getElementById("nombre_completo").value = nombrecompleto;
+                                            const materno_sin=materno.trim();
+                                            const nombrecompleto = nombre_sin+" "+paterno_sin+" "+materno_sin;
+                                            document.getElementById("nombre_completo").value = nombrecompleto
                                         });
                                         $(document).on('blur  ', '#name', function(){
                                             var nombre=document.getElementById("name").value;
+                                            const nombre_sin=nombre.trim();
                                             var paterno=document.getElementById("apellido_paterno").value;
+                                            const paterno_sin=paterno.trim();
                                             var materno=document.getElementById("apellido_materno").value;
-                                            const nombrecompleto = nombre + " " +paterno +" " +materno;
-                                            document.getElementById("nombre_completo").value = nombrecompleto;
+                                            const materno_sin=materno.trim();
+                                            const nombrecompleto = nombre_sin+" "+paterno_sin+" "+materno_sin;
+                                            document.getElementById("nombre_completo").value = nombrecompleto
                                         });
                                         $(document).on('blur  ', '#apellido_paterno', function(){
                                             var nombre=document.getElementById("name").value;
+                                            const nombre_sin=nombre.trim();
                                             var paterno=document.getElementById("apellido_paterno").value;
+                                            const paterno_sin=paterno.trim();
                                             var materno=document.getElementById("apellido_materno").value;
-                                            const nombrecompleto = nombre + " " +paterno +" " +materno;
-                                            document.getElementById("nombre_completo").value = nombrecompleto;
+                                            const materno_sin=materno.trim();
+                                            const nombrecompleto = nombre_sin+" "+paterno_sin+" "+materno_sin;
+                                            document.getElementById("nombre_completo").value = nombrecompleto
                                         });
                                         $(document).on('blur  ', '#apellido_materno', function(){
                                             var nombre=document.getElementById("name").value;
+                                            const nombre_sin=nombre.trim();
                                             var paterno=document.getElementById("apellido_paterno").value;
+                                            const paterno_sin=paterno.trim();
                                             var materno=document.getElementById("apellido_materno").value;
-                                            const nombrecompleto = nombre + " " +paterno +" " +materno;
-                                            document.getElementById("nombre_completo").value = nombrecompleto;
+                                            const materno_sin=materno.trim();
+                                            const nombrecompleto = nombre_sin+" "+paterno_sin+" "+materno_sin;
+                                            document.getElementById("nombre_completo").value = nombrecompleto
                                         });
 
                                     </script>
