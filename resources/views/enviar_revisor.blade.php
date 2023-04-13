@@ -30,6 +30,9 @@
                                      @endforeach
                                      <!--<input type="hidden" value="Derivado" name="estado_revisor" id="estado_revisor">-->
                                      <input type="hidden" value ="{{$solicitud->id}}" name="id_informe" >
+                                     @foreach($revisor as $revisores)
+                                     <input type="hidden" value="{{$revisores->id}}" name="id_revisor">
+                                     @endforeach
                                      <input type="hidden" value="{{$solicitud->fecha}}" name="fecha_generador">
                                      <input type="hidden" value="{{$solicitud->nombre_dirigido}}" name="dirigido_nombre">
                                      <input type="hidden" value="{{$solicitud->cargo_dirigido}}" name="dirigido_cargo">
@@ -65,7 +68,7 @@
                                                     </div>
                                                    
                                                     <div class="col-12">
-                                                        <div class="form-group">
+                                                        <div class="form-group"> 
                                                                 <div class="input-group input-group-static is-valid mb-4">
                                                                     <label for="accion">Accion :<span class="text-danger">(*)</span></label>
                                                                     <select class="form-control" name="estado_revisor" id="estado_revisor" >

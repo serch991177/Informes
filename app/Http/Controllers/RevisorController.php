@@ -91,15 +91,21 @@ class RevisorController extends Controller
         $solicitud = Informe::find($solicitudId);
         $oficinas = Oficinas::all();
         $usuarios = User::all();
-        //Alert::success('Oficina Creada Correctamente'); 
-        //dd($solicitud);
         $iduser= Auth::id();
         $nombre_completo= DB::table('users')
         ->select('users.nombre_completo','users.id','users.cargo','users.unidad','users.firma')
         ->where('users.id', '=', $iduser)
         ->first();
         //dd($nombre_completo);
-        return view('enviar_revisor')->with(['solicitud'=>$solicitud, 'oficinas'=>$oficinas, 'usuarios'=>$usuarios, 'nombre_completo'=>$nombre_completo]);
+        $revisor = DB::table('informe')
+        ->join('revisor','revisor.id_informe','=','informe.id')
+        ->select('informe.id','informe.nombre_dirigido','informe.cargo_dirigido','informe.unidad_dirigido','informe.referencia','informe.tipo_informe','informe.fecha','informe.dato_informe','informe.observacion','revisor.id_informe','revisor.id')
+        ->where('revisor.id_informe','=', $solicitudId)
+        ->get();
+        
+        //dd($revisor);
+
+        return view('enviar_revisor')->with(['solicitud'=>$solicitud, 'oficinas'=>$oficinas, 'usuarios'=>$usuarios, 'nombre_completo'=>$nombre_completo, 'revisor'=>$revisor]);
     }
 
     public function enviarobservacion(Request $req){
@@ -294,7 +300,31 @@ class RevisorController extends Controller
  
         }
         if($request->input('estado_revisor') =="Aprobado"){
-           /**Funcion actualizar informe */
+            /**Actualizar tabla del revisor anterior */
+            $id_update_revisor = $request->id_revisor;
+            $revisor_update= Revisor::find($id_update_revisor);
+            $revisor_update->estado_revisor= "Revisado";
+            $revisor_update->update();
+            /**Fin Actualizar tabla del revisor anterior */
+            /**Insertar el revisor que sera derivado */
+            $revisor_insert= new Revisor;
+            $revisor_insert->id_informe = $request->input('id_informe');
+            $revisor_insert->id_usuario_revisor = $request->input('id_usuario_revisor');
+            $revisor_insert->nombre_revisor = $request->input('nombre_funcionario_revisor');
+            $revisor_insert->numero_generador = $request->input('numero_generador');
+            $revisor_insert->fecha_generador = $request->input('fecha_generador');
+            $revisor_insert->referencia_generada = $request->input('referencia_generada');
+            $revisor_insert->dirigido_nombre = $request->input('dirigido_nombre');
+            $revisor_insert->dirigido_cargo = $request->input('dirigido_cargo');
+            $revisor_insert->dirigido_unidad = $request->input('dirigido_unidad');
+            $revisor_insert->estado_revisor = "Derivado";
+            $revisor_insert->nombre_del_generador = $request->input('nombre_del_generador');
+            $revisor_insert->cargo_del_generador = $request->input('cargo_del_generador');
+            $revisor_insert->unidad_del_generador = $request->input('unidad_del_generador');
+            $revisor_insert->oficina_revisor = $request->input('oficina');
+            $revisor_insert->save();
+            /**Fin insertar el revior que sera derivado */
+            /**Funcion actualizar informe */
             $id = $request->id_informe;
             $request->validate([
                 'usuario'=>'required',
@@ -322,8 +352,9 @@ class RevisorController extends Controller
             }
             $json_transformado = json_encode($array_vacio);
             $informe_update->usuario=$json_transformado;
-            $informe_update->estado=$request->input('estado_revisor');
+            $informe_update->estado= "Derivado";
             $informe_update->update();
+            /**Fin Actualizar informe*/
             Alert::success('Informe Derivado Correctamente'); 
             return redirect('/revisar-informe');
 
