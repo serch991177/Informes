@@ -15,7 +15,7 @@
                                 <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
                                     <h6 class="text-white text-capitalize ps-3">Enviar Para Revision</h6>
                                     <!--<p class="text-white text-capitalize  ps-3">Oficinas</p>-->                            
-                                </div>
+                                </div> 
                             </div>
                             <div class="card-body px-0 pb-2">
                                 <!--card de creacion de oficinas-->

@@ -146,54 +146,89 @@ class RevisorController extends Controller
      */
     public function store(Request $request)
     {
-        /**Funcion Guardar en la tabla de revisor */
-        $request->validate([
-        ]);
-        $category= new Revisor;
-        $category->id_informe = $request->input('id_informe');
-        $category->id_usuario_revisor = $request->input('id_usuario_revisor');
-        $category->nombre_revisor = $request->input('nombre_funcionario_revisor');
-        $category->numero_generador = $request->input('numero_generador');
-        $category->fecha_generador = $request->input('fecha_generador');
-        $category->referencia_generada = $request->input('referencia_generada');
-        $category->dirigido_nombre = $request->input('dirigido_nombre');
-        $category->dirigido_cargo = $request->input('dirigido_cargo');
-        $category->dirigido_unidad = $request->input('dirigido_unidad');
-        $category->estado_revisor = $request->input('estado_revisor');
-        $category->nombre_del_generador = $request->input('nombre_del_generador');
-        $category->cargo_del_generador = $request->input('cargo_del_generador');
-        $category->unidad_del_generador = $request->input('unidad_del_generador');
-        $category->oficina_revisor = $request->input('oficina');
-        $category->save();
-        /**Fin revisor */
+        //Evitar duplicidad de nombre,cargo,unidad de los usuarios con tres roles
+        $evitar_duplicidad = auth()->user();
+        //dd("El nombre de requet es " .$request->input('funcionario') ." y el nombre de las sesion es " .$evitar_duplicidad->nombre_completo);
+        if($request->input('funcionario') == $evitar_duplicidad->nombre_completo){
+                /**Funcion Guardar en la tabla de revisor */
+                $request->validate([
+                ]);
+                $category= new Revisor;
+                $category->id_informe = $request->input('id_informe');
+                $category->id_usuario_revisor = $request->input('id_usuario_revisor');
+                $category->nombre_revisor = $request->input('nombre_funcionario_revisor');
+                $category->numero_generador = $request->input('numero_generador');
+                $category->fecha_generador = $request->input('fecha_generador');
+                $category->referencia_generada = $request->input('referencia_generada');
+                $category->dirigido_nombre = $request->input('dirigido_nombre');
+                $category->dirigido_cargo = $request->input('dirigido_cargo');
+                $category->dirigido_unidad = $request->input('dirigido_unidad');
+                $category->estado_revisor = $request->input('estado_revisor');
+                $category->nombre_del_generador = $request->input('nombre_del_generador');
+                $category->cargo_del_generador = $request->input('cargo_del_generador');
+                $category->unidad_del_generador = $request->input('unidad_del_generador');
+                $category->oficina_revisor = $request->input('oficina');
+                $category->save();
+                /**Fin revisor */
 
-        /**Funcion actualizar informe */
-        $id = $request->id_informe;
-        $informe_update= Informe::find($id);
-        $array_vacio = array();
-        $arrays_usuarios = $request->input('usuario');
-        $arrays_cargos= $request->input('cargo');
-        $arrays_unidad=$request->input('unidad');
-        $arrays_firmas=$request->input('firma');
-        for ($i=0;$i<count($arrays_usuarios); $i++)
-        {
-            $json_tranformas=[  
-            
-                'nombre'=>$arrays_usuarios[$i],
-                'cargo'=>$arrays_cargos[$i],
-                'unidad'=>$arrays_unidad[$i],
-                'firma'=>$arrays_firmas[$i],
+                 /**Funcion actualizar informe */
+                 $id = $request->id_informe;
+                $informe_update= Informe::find($id);
+                $informe_update->estado=$request->input('estado_revisor');
+                $informe_update->update();
+                /**Fin actualizar informe */
+                Alert::success('Informe Derivado Correctamente'); 
+                return redirect('/billing');
+        }else{
+            /**Funcion Guardar en la tabla de revisor */
+            $request->validate([
+            ]);
+            $category= new Revisor;
+            $category->id_informe = $request->input('id_informe');
+            $category->id_usuario_revisor = $request->input('id_usuario_revisor');
+            $category->nombre_revisor = $request->input('nombre_funcionario_revisor');
+            $category->numero_generador = $request->input('numero_generador');
+            $category->fecha_generador = $request->input('fecha_generador');
+            $category->referencia_generada = $request->input('referencia_generada');
+            $category->dirigido_nombre = $request->input('dirigido_nombre');
+            $category->dirigido_cargo = $request->input('dirigido_cargo');
+            $category->dirigido_unidad = $request->input('dirigido_unidad');
+            $category->estado_revisor = $request->input('estado_revisor');
+            $category->nombre_del_generador = $request->input('nombre_del_generador');
+            $category->cargo_del_generador = $request->input('cargo_del_generador');
+            $category->unidad_del_generador = $request->input('unidad_del_generador');
+            $category->oficina_revisor = $request->input('oficina');
+            $category->save();
+            /**Fin revisor */
+
+            /**Funcion actualizar informe */
+            $id = $request->id_informe;
+            $informe_update= Informe::find($id);
+            $array_vacio = array();
+            $arrays_usuarios = $request->input('usuario');
+            $arrays_cargos= $request->input('cargo');
+            $arrays_unidad=$request->input('unidad');
+            $arrays_firmas=$request->input('firma');
+            for ($i=0;$i<count($arrays_usuarios); $i++)
+            {
+                $json_tranformas=[  
                 
-            ];
-            array_push($array_vacio,$json_tranformas);
+                    'nombre'=>$arrays_usuarios[$i],
+                    'cargo'=>$arrays_cargos[$i],
+                    'unidad'=>$arrays_unidad[$i],
+                    'firma'=>$arrays_firmas[$i],
+                    
+                ];
+                array_push($array_vacio,$json_tranformas);
+            }
+            $json_transformado = json_encode($array_vacio);
+            $informe_update->usuario=$json_transformado;
+            $informe_update->estado=$request->input('estado_revisor');
+            $informe_update->update();
+            /**Fin actualizar informe */
+            Alert::success('Informe Derivado Correctamente'); 
+            return redirect('/billing');
         }
-        $json_transformado = json_encode($array_vacio);
-        $informe_update->usuario=$json_transformado;
-        $informe_update->estado=$request->input('estado_revisor');
-        $informe_update->update();
-        /**Fin actualizar informe */
-        Alert::success('Informe Derivado Correctamente'); 
-        return redirect('/billing');
     }
 
     public function actualizarobservacion(Request $request){
