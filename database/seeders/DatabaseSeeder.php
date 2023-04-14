@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
             'generador'=>'true',
             'revisor'=>'true',
             'finalizador'=>'true',
+            'administrador'=>'true',
             'nombre_completo'=>'Admin admin admin',
         ]);
 

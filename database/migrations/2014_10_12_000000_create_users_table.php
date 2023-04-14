@@ -31,6 +31,7 @@ class CreateUsersTable extends Migration
             $table->boolean('generador')->nullable();
             $table->boolean('revisor')->nullable();
             $table->boolean('finalizador')->nullable();
+            $table->boolean('administrador')->nullable();
             $table->text('firma')->nullable();
             $table->text('nombre_completo')->nullable();
             $table->rememberToken();

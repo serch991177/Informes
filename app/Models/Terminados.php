@@ -5,16 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Observaciones extends Model
+class Terminados extends Model
 {
     use HasFactory;
-
-   
-    protected $table = 'observaciones';
+    protected $table = 'terminados';
     protected $fillable = [
-        'id_informe_observado',
-        'id_usuario_observado',
-        'observacion_informe',
-       
+        'id_informe_terminado',
+        'id_usuario_terminado',
     ];
 }

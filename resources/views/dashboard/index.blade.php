@@ -18,7 +18,8 @@
                         <div class="col-lg-12 col-md-12">          
                             <h3 style="color:white">BIENVENIDO AL:</h3>
                             <h1 class="text-center" style="color:white">SISTEMA DE INFORMES SUB ALCALDIA</h1>                    
-                        </div>                
+                        </div>     
+                                  
                     </div>
                  </div>
                 </div>

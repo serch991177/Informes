@@ -39,6 +39,7 @@ use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\OficinaController;
 use App\Http\Controllers\InformeController;
 use App\Http\Controllers\RevisorController;
+use App\Http\Controllers\terminadosController;
 
 
 Route::get('/', function () {return redirect('sign-in');})->middleware('guest');
@@ -74,15 +75,10 @@ Route::post('/actualizar-revisor', [RevisorController::class, 'update'])->middle
 Route::get('/observaciones', [RevisorController::class, 'observacion'])->middleware('auth')->name('informes_observados');
 Route::post('/enviar-observacion-subsanada',[RevisorController::class, 'enviarobservacion'])->middleware('auth')->name('enviar_observacion_subsanada');
 Route::post('/actualizar-observacion', [RevisorController::class, 'actualizarobservacion'])->middleware('auth')->name('guardar_actualizar_observacion');
-
-
-
-
- 
-
- 
-
-
+Route::post('/finalizar-tramite', [RevisorController::class, 'finalizartramite'])->middleware('auth')->name('finalizar_tramite');
+//rutas Informe terminado
+Route::get('/ver-informes-terminados', [terminadosController::class, 'index'])->middleware('auth')->name('ver_informe_terminado');
+Route::post('/tramite-finalizado', [terminadosController::class, 'pdffinal'])->middleware('auth')->name('descargarpdffinal');
 //fin rutas de las oficinas
 
 

@@ -32,8 +32,9 @@
                     <span class="nav-link-text ms-1">Perfil</span>
                 </a>
             </li>
+            @if(auth()->user()->administrador =="true")
             <li class="nav-item">
-                <a class="nav-link text-dark {{ $activePage == 'user-management' ? ' active bg-gradient-primary' : '' }} "
+                <a class="nav-link text-dark {{ $activePage == 'Funcionarios' ? ' active bg-gradient-primary' : '' }} "
                     href="{{ route('user-management') }}">
                     <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
                         <i style="font-size: 1rem;" class="fas fa-lg fa-list-ul ps-2 pe-2 text-center"></i>
@@ -41,9 +42,8 @@
                     <span class="nav-link-text ms-1">Funcionarios</span>
                 </a>
             </li>
-            
             <li class="nav-item">
-                <a class="nav-link text-dark {{ $activePage == 'tables' ? ' active bg-gradient-primary' : '' }} "
+                <a class="nav-link text-dark {{ $activePage == 'Oficinas' ? ' active bg-gradient-primary' : '' }} "
                     href="{{ route('tables') }}">
                     <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">table_view</i>
@@ -51,8 +51,10 @@
                     <span class="nav-link-text ms-1">Oficinas</span>
                 </a>
             </li>
+            @endif
+            @if(auth()->user()->generador =="true")
             <li class="nav-item">
-                <a class="nav-link text-dark {{ $activePage == 'billing' ? ' active bg-gradient-primary' : '' }}  "
+                <a class="nav-link text-dark {{ $activePage == 'Informes' ? ' active bg-gradient-primary' : '' }}  "
                     href="{{ route('billing') }}">
                     <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">receipt_long</i>
@@ -60,8 +62,10 @@
                     <span class="nav-link-text ms-1">Generar Informe</span>
                 </a>
             </li>
+            @endif
+            @if(auth()->user()->revisor =="true")
             <li class="nav-item">
-                <a class="nav-link text-dark {{ $activePage == 'virtual-reality' ? ' active bg-gradient-primary' : '' }}  "
+                <a class="nav-link text-dark {{ $activePage == 'Revisar Informe' ? ' active bg-gradient-primary' : '' }}  "
                     href="{{ route('revisar_informe') }}">
                     <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">archive</i>
@@ -69,8 +73,9 @@
                     <span class="nav-link-text ms-1">Revisar Informe</span>
                 </a>
             </li>
+            @endif
             <li class="nav-item">
-                <a class="nav-link text-dark {{ $activePage == 'rtl' ? ' active bg-gradient-primary' : '' }}  "
+                <a class="nav-link text-dark {{ $activePage == 'Observaciones' ? ' active bg-gradient-primary' : '' }}  "
                     href="{{ route('informes_observados') }}">
                     <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">format_textdirection_r_to_l</i>
@@ -78,7 +83,28 @@
                     <span class="nav-link-text ms-1">Observaciones</span>
                 </a>
             </li>
+            @if(auth()->user()->finalizador =="true")
             <li class="nav-item">
+                <a class="nav-link text-dark {{ $activePage == 'Informes Terminados' ? ' active bg-gradient-primary' : '' }}  "
+                    href="{{ route('ver_informe_terminado') }}">
+                    <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+                        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+                    <style>
+                        .material-symbols-outlined {
+                        font-variation-settings:
+                        'FILL' 0,
+                        'wght' 300,
+                        'GRAD' 0,
+                        'opsz' 48
+                        }
+                    </style>
+                        <i class="material-symbols-outlined">inventory</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Informes Finalizados</span>
+                </a>
+            </li>
+           @endif
+            <!--<li class="nav-item">
                 <a class="nav-link text-dark {{ $activePage == 'notifications' ? ' active bg-gradient-primary' : '' }}  "
                     href="{{ route('notifications') }}">
                     <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
@@ -95,7 +121,7 @@
                     </div>
                     <span class="nav-link-text ms-1">Profile</span>
                 </a>
-            </li>
+            </li>-->
             
         </ul>
         

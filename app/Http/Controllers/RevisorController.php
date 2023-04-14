@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\Oficinas;
 use App\Models\Revisor;
 use App\Models\Observaciones;
+use App\Models\Terminados;
 use RealRashid\SweetAlert\Facades\Alert;
 use Dompdf\Dompdf;
 use Dompdf\Options;
@@ -363,6 +364,21 @@ class RevisorController extends Controller
         
     }
 
+    public function finalizartramite(Request $request){
+        $id_informe_table = $request->id_recuperar;
+        $iduser= Auth::id(); 
+        $terminado_insert= new Terminados;
+        $terminado_insert->id_informe_terminado =$id_informe_table;
+        $terminado_insert->id_usuario_terminado = $iduser;
+        $terminado_insert->save();
+
+        $id_informe_terminado = $request->id_recuperar;
+        $informe_terminado= Informe::find($id_informe_terminado);
+        $informe_terminado->estado= "Finalizado";
+        $informe_terminado->update();
+        Alert::success('Tramite Finalizado'); 
+        return redirect('/ver-informes-terminados');
+    }
     /**
      * Remove the specified resource from storage.
      */

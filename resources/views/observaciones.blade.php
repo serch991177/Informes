@@ -98,13 +98,7 @@
                                                             <input type="hidden" name="id" value="{{$usuario_generadores->id_informe_observado}}">
                                                             <button class="btn btn-primary" title="Imprimir Informe"><i class="fa fa-print" aria-hidden="true"></i></button>
                                                         </form>
-                                                        <!--@if( $rol_usuario->finalizador=="true")
-                                                        <form action="#" method="post" >
-                                                            @csrf 
-                                                            <input type="hidden" name="id" value="{{$usuario_generadores->id_informe}}">
-                                                            <button class="btn btn-warning" title="Finalizar tramite"><i class="fa fa-check-square-o" aria-hidden="true"></i></button>
-                                                        </form>
-                                                        @endif-->
+                                                        
                                                     </td>
                                                 </tr>
                                             @endif 

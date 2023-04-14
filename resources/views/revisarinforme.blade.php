@@ -21,9 +21,9 @@
                             
                             <div class="row" >
                                 <div class="" style="text-align:right"> 
-                                    <form action="" >   
+                                    <!--<form action="" >  --> 
                                        <!-- <a href="{{route('informe')}}" class="btn btn-md  text-white" title="Crear Nueva Oficina"><i class="fas fa-plus-circle text-dark fa-2x"></i></a>-->
-                                    </form>
+                                    <!--</form>-->
                                 </div>
                             </div>
                             <div class="card-body px-0 pb-2">
@@ -42,6 +42,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                            
                                             @foreach($usuario_generador as $usuario_generadores)
                                             @if($rol_usuario->revisor=="true" || $rol_usuario->finalizador=="true")
                                             @if($usuario_generadores->estado=="Derivado" && $usuario_generadores->estado_revisor=="Derivado" )    
@@ -69,13 +70,78 @@
                                                             <input type="hidden" name="id" value="{{$usuario_generadores->id_informe}}">
                                                             <button class="btn btn-primary" title="Imprimir Informe"><i class="fa fa-print" aria-hidden="true"></i></button>
                                                         </form>
-                                                        <!--@if( $rol_usuario->finalizador=="true")
-                                                        <form action="#" method="post" >
+                                                        @if( $rol_usuario->finalizador=="true")
+                                                        <!-- Button trigger modal -->
+                                                        <!--<button class="btn btn-warning" title="Finalizar tramite"><i class="fa fa-check-square-o" aria-hidden="true"></i></button>-->
+                                                        <button type="button" title="Finalizar tramite" class="btn btn-warning id_editar" data-bs-toggle="modal" data-bs-target="#exampleModal" value="{{$usuario_generadores->id_informe}}">
+                                                        <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                                        </button>
+
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                            <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title col-11 text-center" id="exampleModalLabel">Finalizar Tramite</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                            <div class="py-3 text-center">
+                                                            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+                                                            <style>
+                                                            .material-symbols-outlined {
+                                                            font-variation-settings:
+                                                            'FILL' 0,
+                                                            'wght' 400,
+                                                            'GRAD' 0,
+                                                            'opsz' 48
+                                                            }
+                                                            </style>
+                                                            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+                                                            <i class="material-symbols-outlined" style="font-size:150px">
+                                                            warning
+                                                             </i>
+                                                               
+                                                                <h4 class="text-gradient text-danger mt-4">Atencion!</h4>
+                                                                <p>Una vez finalizado el tramite no podra realizar ninguna modificacion.</p>
+                                                            </div>
+                                                            <form name="formulario_final" id="formulario_final" action="{{route('finalizar_tramite')}}" method="post" >
+                                                                @csrf 
+                                                                <div  id="inputid_div"></div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                                <button type="submit" class="btn bg-gradient-primary">Terminar Tramite</button>
+                                                            </div>
+                                                            </div>
+                                                            </form>
+                                                        </div>
+                                                        </div>
+                                                        <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+                                                        <script>
+                                                            $(document).ready(function(){
+                                                                $(document).on('click', '.id_editar', function(){
+                                                                    var id=$(this).val();
+                                                                    console.log(id);
+                                                                    let inputid="";
+                                                                    inputid += `<input type="hidden"  name="id_recuperar" id="id_recuperar" value="${id}">`;
+                                                                    document.getElementById('inputid_div').innerHTML = inputid;
+                                                                });
+                                                            });
+                                                        </script>
+                                                        <!--<form name="formulario_final" id="formulario_final" action="{{route('finalizar_tramite')}}" method="post" >
                                                             @csrf 
-                                                            <input type="hidden" name="id" value="{{$usuario_generadores->id_informe}}">
+                                                            <input type="" name="id" value="{{$usuario_generadores->id_informe}}">
                                                             <button class="btn btn-warning" title="Finalizar tramite"><i class="fa fa-check-square-o" aria-hidden="true"></i></button>
-                                                        </form>
-                                                        @endif-->
+                                                            --><!--<button type="button" onclick="confirmToSaveBarsit();" value="{{$usuario_generadores->id_informe}}" class="btn btn-warning" title="Finalizar tramite"><i class="fa fa-check-square-o terminar_tramite" aria-hidden="true"></i></button>-->
+                                                            <!--<button type="submit" id="btnSend" ></button>-->
+                                                        <!--</form>-->
+                                                        @endif
+                                                  
+
+
                                                     </td>
                                                 </tr>
                                             @endif   

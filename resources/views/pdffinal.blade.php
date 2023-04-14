@@ -102,19 +102,14 @@
 
         <!-- Wrap the content of your PDF inside a main tag -->
 
-        <div style="position: fixed; bottom:   0cm; left:     0.2cm; width:    20cm; height:   20cm; z-index:  -1000;">
-          @php($image_path3 = public_path() . '/img/borrador.png')
-          @php($imageData3 = base64_encode(file_get_contents($image_path3)))
-          @php($src3 = 'data:' . mime_content_type($image_path3) . ';base64,' . $imageData3)
-          <img src="{{$src3}}" height="100%" width="100%">
-        </div>
+       
 
 
         <main>
             <br>
             <!--<span style="font-size:1pc;">Cochabamba, 1 de Marzo de 2023 </span>-->
             <span style="font-size:1pc;">Cochabamba, {{$fechaformateada}}</span>
-            <h2 style="line-height: 0cm;">GAMC-M-XX</h2><br><br>
+            <h2 style="line-height: 0cm;">GAMC-CM-CE-505/2022</h2><br><br>
 
             <span style="font-size:1pc; line-height: 0.5cm;">A:</span><br>
             <span style="font-size:1pc; line-height: 0.5cm;">{{$informe->nombre_dirigido}}</span><br>
