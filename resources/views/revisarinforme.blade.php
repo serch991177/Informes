@@ -105,17 +105,21 @@
                                                              </i>
                                                                
                                                                 <h4 class="text-gradient text-danger mt-4">Atencion!</h4>
-                                                                <p>Una vez finalizado el tramite no podra realizar ninguna modificacion.</p>
+                                                                <span class="text-danger mt-4">Una vez finalizado el tramite no podra realizar ninguna modificacion.</span>
                                                             </div>
                                                             <form name="formulario_final" id="formulario_final" action="{{route('finalizar_tramite')}}" method="post" >
                                                                 @csrf 
                                                                 <div  id="inputid_div"></div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                                <button type="submit" class="btn bg-gradient-primary">Terminar Tramite</button>
-                                                            </div>
-                                                            </div>
+                                                                <div class="input-group input-group-outline my-3">
+                                                                    <label class="form-label">Por favor Ingrese el cite</label>
+                                                                    <input type="text" name="cite" class="form-control" onfocus="focused(this)" onfocusout="defocused(this)" required>
+                                                                </div>
+                                                               </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                                    <button type="submit" class="btn bg-gradient-primary">Terminar Tramite</button>
+                                                                </div>
+                                                                </div>
                                                             </form>
                                                         </div>
                                                         </div>

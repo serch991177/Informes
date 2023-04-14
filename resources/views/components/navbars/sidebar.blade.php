@@ -63,7 +63,7 @@
                 </a>
             </li>
             @endif
-            @if(auth()->user()->revisor =="true")
+            @if(auth()->user()->revisor =="true" || auth()->user()->finalizador =="true")
             <li class="nav-item">
                 <a class="nav-link text-dark {{ $activePage == 'Revisar Informe' ? ' active bg-gradient-primary' : '' }}  "
                     href="{{ route('revisar_informe') }}">

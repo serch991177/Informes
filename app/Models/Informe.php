@@ -24,6 +24,7 @@ class Informe extends Model
         'id_oficina',
         'oficina',
         'numero',
+        'cite',
     ];
     protected $casts=[
         'usuario'=> 'array',

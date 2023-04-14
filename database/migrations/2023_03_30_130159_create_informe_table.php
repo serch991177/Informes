@@ -25,6 +25,7 @@ return new class extends Migration
             $table->text('dato_informe');
             $table->text('observacion')->nullable();
             $table->text('estado')->nullable();
+            $table->text('cite')->nullable();
             $table->text('id_oficina')->nullable();
             $table->text('oficina')->nullable();
             $table->timestamps();

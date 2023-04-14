@@ -400,17 +400,21 @@ class RevisorController extends Controller
     }
 
     public function finalizartramite(Request $request){
+        /**Guardar en la tabla de terminado */
         $id_informe_table = $request->id_recuperar;
         $iduser= Auth::id(); 
         $terminado_insert= new Terminados;
         $terminado_insert->id_informe_terminado =$id_informe_table;
         $terminado_insert->id_usuario_terminado = $iduser;
         $terminado_insert->save();
-
+        /**Fin guardar tabla de terminados */
+        /**Actualizar informe */
         $id_informe_terminado = $request->id_recuperar;
         $informe_terminado= Informe::find($id_informe_terminado);
         $informe_terminado->estado= "Finalizado";
+        $informe_terminado->cite= $request->input('cite');
         $informe_terminado->update();
+        /**Fin Actualizar informe */ 
         Alert::success('Tramite Finalizado'); 
         return redirect('/ver-informes-terminados');
     }

@@ -109,7 +109,7 @@
             <br>
             <!--<span style="font-size:1pc;">Cochabamba, 1 de Marzo de 2023 </span>-->
             <span style="font-size:1pc;">Cochabamba, {{$fechaformateada}}</span>
-            <h2 style="line-height: 0cm;">GAMC-CM-CE-505/2022</h2><br><br>
+            <h2 style="line-height: 0cm;">{{$informe->cite}}</h2><br><br>
 
             <span style="font-size:1pc; line-height: 0.5cm;">A:</span><br>
             <span style="font-size:1pc; line-height: 0.5cm;">{{$informe->nombre_dirigido}}</span><br>

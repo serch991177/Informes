@@ -41,7 +41,7 @@ class terminadosController extends Controller
         $solicitud = Informe::find($solicitudId);
 
         $informe=DB::table('informe')->where('informe.id','=',$solicitudId)
-            ->select('informe.id','informe.numero','informe.id_usuario_generador','informe.usuario','informe.nombre_dirigido','informe.cargo_dirigido','informe.unidad_dirigido','informe.referencia','informe.tipo_informe','informe.fecha','informe.dato_informe','informe.id_oficina','informe.oficina')
+            ->select('informe.id','informe.numero','informe.id_usuario_generador','informe.usuario','informe.nombre_dirigido','informe.cargo_dirigido','informe.unidad_dirigido','informe.referencia','informe.tipo_informe','informe.fecha','informe.dato_informe','informe.id_oficina','informe.oficina','informe.cite')
             -> first(); 
         
         $fecha=DB::table('informe')->where('informe.id','=',$solicitudId)
